@@ -5,7 +5,7 @@ function Login(){
         <div className="form-container">
             <h1>Bienvenido</h1>
             
-            <form className="form">
+            <form className="grid form">
                 <label>Correo electrónico</label>
                 <input type="email" placeholder="usuario@correo.com.mx" />
 
@@ -14,7 +14,7 @@ function Login(){
 
                 <button className="btn" type="submit">Iniciar sesión</button>
 
-                <div className="row">
+                <div className="grid row">
                     <span>¿No tienes cuenta?</span>
                     <a href="https://www.google.com" className="register-link">Registrarme</a>
                 </div>

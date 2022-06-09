@@ -10,6 +10,7 @@ h3 {
   color: var(--grey);
   border-bottom: 1px solid var(--sky-blue);
   padding: 0 0 10px;
+  font-weight: normal;
 }
 
 ul {
@@ -26,12 +27,13 @@ a {
 
 img{ width: 150px; }
 
+.grid { display: grid; }
+
 .container {
   width: 90vw;
   margin: 40px auto;
-  display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  /* grid-template-rows: repeat(3, 1fr); */
   gap: 20px 30px;
 }
 
@@ -91,8 +93,6 @@ img{ width: 150px; }
   margin: 0 auto;
 }
 
-.form { display: grid; }
-
 .form label{ font-size: 14px; }
 
 .form input {
@@ -105,12 +105,9 @@ img{ width: 150px; }
 }
 
 .row {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 30px;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 30px;
 }
-
-.row div { display: grid; }
 
 .form span{ font-weight: bold; }
 
@@ -122,23 +119,49 @@ img{ width: 150px; }
 .register-link:hover { color: var(--dark-blue); }
 
 /* DASHBOARD */
-aside.card { grid-area: 1/3 /4; }
-
 .card{
   box-shadow: rgb(0 0 0) 0px 0px 5px -2px;
   padding: 0 16px 16px;
 }
 
-.card-container:not(#hour, #completed-task, #uncompleted-task, #timezone) {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+.card-container:not(#available-country) {
+  height: calc(100% - 75px); /* FONT-SIZE, MARGIN Y PADDING (TOP Y BOTTOM) DEL TITULO (H3) ADEMÁS DEL PADDING (TOP Y BOTTOM) DE .CARD */
 }
+
+#weather, #country { grid-template-columns: repeat(2, 1fr); }
+
+aside.card { grid-area: 1/3 /4; }
+
+aside .card-container {
+  grid-template-columns: 60px auto;
+  gap: 15px;
+}
+
+#available-country img{ width: 50px; }
 
 #hour p, #temperature p, #country p{
   text-align: center;
   margin: 0;
-  align-self: center;
   font-size: 40px;
 }
 
+#temperature, .card-container img, .card-container:not(#available-country) p { place-self: center; }
+
 #temperature span{ font-weight: bold; }
+
+.card-container li { margin: 15px 0; }
+
+/* USER */
+table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td { padding: 10px 5px; }
+
+th {
+  text-align: left;
+  font-weight: normal;
+}
+
+td { border-top: 1px solid var(--grey); }

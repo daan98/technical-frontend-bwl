@@ -3,15 +3,14 @@ import React from "react";
 function Dashboard(){
     const cloud = require("../assets/partly-cloudy-icon.png");
     const flag = require("../assets/mexico.png");
-    let today = new Date();
-    let time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    /* let today = new Date();
+    let time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds(); */
 
     return(
-        <div className="container">
-            
+        <div className="grid container">
             <div className="card">
                 <h3>Clima</h3>
-                <div className="card-container" >
+                <div id="weather" className="grid card-container" >
                     <img srcSet={cloud} alt="weather"/>
                     <div id="temperature">
                         <p>29 C</p>
@@ -22,7 +21,7 @@ function Dashboard(){
 
             <div className="card">
                 <h3>País seleccionado</h3>
-                <div id="country" className="card-container" >
+                <div id="country" className="grid card-container" >
                     <p>México</p>
                     <img src={flag} alt="flag" />
                 </div>
@@ -39,12 +38,10 @@ function Dashboard(){
                 </div>
             </div>
             
-
-            
             <div className="card">
                 <h3>Hora</h3>
                 <div id="hour" className="card-container" >
-                    <p>{ time }</p>
+                    <p>11:15:15 P.M.</p>
                 </div>
             </div>
 
@@ -69,11 +66,10 @@ function Dashboard(){
                     </ul>
                 </div>
             </div>
-        
-
+            
             <aside className="card">
                 <h3>Paises disponibles</h3>
-                <div id="available-country" className="card-container" >
+                <div id="available-country" className="grid card-container" >
                     <img src={flag} alt="flag" />
                     <p>México</p>
                 </div>
