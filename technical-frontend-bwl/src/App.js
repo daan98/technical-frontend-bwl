@@ -1,12 +1,19 @@
+import { Route, Routes } from 'react-router';
 import './App.css';
-import Header from './components/Header';
+import Dashboard from './components/Dashboard';
+import Login from './components/Login';
+import Register from './components/Register';
 import User from './components/User';
 
 function App() {
   return (
     <div>
-      <Header/>
-      <User/>
+      <Routes>
+        <Route path="/usuario" element={<User/>} />
+        <Route path="/dashboard" element={<Dashboard/>} />
+        <Route path="/registro" element={<Register/>} />
+        <Route path="/" element={<Login/>} />
+      </Routes>
     </div>
   );
 }

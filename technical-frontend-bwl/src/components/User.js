@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import Header from './Header'
 
 function User(){
+    
+    const time = new Date().toLocaleString('en-US', {hour: 'numeric', minute: 'numeric', second: 'numeric'});
+    const dateString = new Date().toLocaleString('en-GB', { day:'2-digit', month: '2-digit', year:'numeric' });
+    
+    console.log('time: ', time);
+    console.log('full date: ', dateString);
+    
     return(
-        <div className='container'>
+        <Fragment>
+            <Header />
+            <div className='container'>
             <h3>Lista de usuarios del sistema</h3>
 
             <table>
@@ -24,6 +34,7 @@ function User(){
                 </tbody>
             </table>
         </div>
+        </Fragment>
     );
 }
 

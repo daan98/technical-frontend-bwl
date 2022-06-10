@@ -33,18 +33,16 @@ img{ width: 150px; }
   width: 90vw;
   margin: 40px auto;
   grid-template-columns: repeat(3, 1fr);
-  /* grid-template-rows: repeat(3, 1fr); */
   gap: 20px 30px;
 }
 
 .btn {
+  text-align: center;
   background-color: var(--sky-blue);
   color: #FFFFFF;
-  border: none;
   box-shadow: rgb(0 0 0 / 35%) 0px 10px 10px -3px;
   padding: 20px 0;
   margin: 30px 0;
-  cursor: pointer;
   transition: all ease-in-out .3s;
 }
 
@@ -55,31 +53,28 @@ img{ width: 150px; }
 
 /* HEADER */
 .navbar {
+  display: flex;
   background-color: var(--sky-blue);
   padding: 0 20px;
   color: #FFFFFF;
 }
 
-.navbar ul { display: flex; }
-
-.navbar ul li{ 
+.navbar a {
   padding: 25px 10px;
   transition: all ease-in-out .3s;
 }
 
-.navbar li:last-child{
-  flex-grow: 1;
-  text-align: end;
-}
-
-.navbar li:hover:not(.navbar li:last-child) {
+.navbar a:hover {
   background-color: var(--dark-blue);
   transition: all ease-in-out .3s;
 }
 
-.navbar a { padding: 10px 0; }
+.navbar p{
+  flex-grow: 1;
+  text-align: end;
+}
 
-.navbar ul li span {
+.navbar p span {
   background-color: var(--purple);
   margin-right: 10px;
   border-radius: 50px;
@@ -125,7 +120,7 @@ img{ width: 150px; }
 }
 
 .card-container:not(#available-country) {
-  height: calc(100% - 75px); /* FONT-SIZE, MARGIN Y PADDING (TOP Y BOTTOM) DEL TITULO (H3) ADEMÁS DEL PADDING (TOP Y BOTTOM) DE .CARD */
+  height: calc(100% - 75px); /* 75px = FONT-SIZE + MARGIN + PADDING (TOP Y BOTTOM) DEL TITULO (H3) + PADDING (TOP Y BOTTOM) DE .CARD */
 }
 
 #weather, #country { grid-template-columns: repeat(2, 1fr); }
@@ -150,6 +145,17 @@ aside .card-container {
 #temperature span{ font-weight: bold; }
 
 .card-container li { margin: 15px 0; }
+
+#timezone ul li {
+  width: fit-content;
+  transition: all ease-in-out .3s;
+  cursor: pointer;
+}
+
+#timezone ul li:hover {
+  color: var(--dark-blue);
+  transition: all ease-in-out .3s;
+}
 
 /* USER */
 table{
