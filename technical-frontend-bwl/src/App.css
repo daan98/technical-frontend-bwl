@@ -157,6 +157,10 @@ aside .card-container {
   transition: all ease-in-out .3s;
 }
 
+p#new-hour {
+  font-size: 15px;
+  color: var(--sky-blue);
+}
 /* USER */
 table{
   width: 100%;

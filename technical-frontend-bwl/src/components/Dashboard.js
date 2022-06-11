@@ -6,9 +6,10 @@ import Header from './Header';
 function Dashboard(){
     const [weather, setWeather] = useState([]);
     const [clock, setClock] = useState('');
-    let [timezone, setTimezone] = useState('');
     const key = 'abc55348044d4260bad201612220906';
-    let state = 'las vegas';    
+    let state = 'las vegas';   
+    let selectedTimezone = ''; 
+    const timezone = ['Pacífico - Nevada', 'Montaña - Colorado', 'Este - Virginia', 'Buenos Aires'];
     const cities = [
         {
             country: 'Mexico',
@@ -29,66 +30,41 @@ function Dashboard(){
             pais: 'Estados Unidos',
         },
     ];
+    const paragraph = document.createElement('p').setAttribute('id', 'new-hour');
+    const hourContainer = document.getElementById('hour');
+
 
     //IMPRIMIR UNA ALERTA QUE ESPECIFIQUE LA HORA
-    /* const handleOnClickTimeZone = (timezone, prueba) => {
-        console.log(prueba);
-        // const timezones = document.querySelector('#timezone ul li');
-        const time = new Date();
-        let hour = time.getHours()
-        let minutes = time.getMinutes();
-        let seconds = time.getSeconds();
-        let ampm = 'AM';
+    const handleOnClickTimeZone = () => {
+        const m = moment();
+        let change = m;
+        let time;
 
-        console.log(timezone);
-        if(timezone === 'Pacifico - Nevada'){
-            state = 'las vegas';
-            hour -= 2;
-            console.log(hour);
-        } else if(timezone === 'Montaña - Colorado'){
-            state = 'denver';
-            hour -= 1;
-        } else if(timezone === 'Central - Oklahoma'){
-            state = 'oklahoma city';
-        } else if(timezone === 'Este - Virginia'){
-            state = 'virginia beach';
-            hour += 1;
-        } else if(timezone === 'Buenos Aires'){
-            state = 'buenos aires';
-            hour += 2;
-        } else{
-            console.log('TIMEZONE: ' + timezone + 'HOUR: ' + hour);
-            setClock(time.toLocaleTimeString('en-US'));
-            return;
+        const result = timezone.filter(zone => zone === selectedTimezone);
+        console.log(result.includes(selectedTimezone));
+        if(result[0] === 'Pacífico - Nevada'){
+            paragraph.innerText = `${result[0]} ${change.subtract(2, 'hours').format('hh:mm:ss A')}`;
+            hourContainer.appendChild(paragraph);
+            state = 'las vegas'
+        } else if(result[0] === 'Montaña - Colorado'){
+            paragraph.innerText = `${result[0]} ${change.subtract(1, 'hours').format('hh:mm:ss A')}`;
+            hourContainer.appendChild(paragraph);
+            state = 'denver'
+        } else if(result[0] === 'Central - Oklahoma'){
+            state = 'oklahoma city'
+        } else if(result[0] === 'Este - Virginia'){
+            paragraph.innerText = `${result[0]} ${change.add(1, 'hours').format('hh:mm:ss A')}`;
+            hourContainer.appendChild(paragraph);
+            state = 'carolina beach'
+        }else if(result[0] === 'Buenos Aires'){
+            paragraph.innerText = `${result[0]} ${change.add(2, 'hours').format('hh:mm:ss A')}`;
+            hourContainer.appendChild(paragraph);
+            state = 'buenos aires'
         }
-        console.log(hour);
 
-        // Detectando cuando es de mañana o tarde
-        
-        if(hour > 12) {
-            hour -= 12
-            ampm = 'PM'
-        }else if(hour === 0) {
-            hour = 12
-            ampm = 'AM';
-        }else if(hour === -2){
-            hour = 10;
-            ampm = 'PM';
-        } else if(hour === -1){
-            hour = 11;
-            ampm = 'PM';
-        } else if(hour === 12) ampm = 'PM'
-        
-
-        // Colocando un cero para mostrar siempre 2 digitos
-        if(hour.toString().length === 1) hour = `0${hour}`;
-        if(minutes.toString().length === 1) minutes = `0${minutes}`;
-        if(seconds.toString().length === 1) seconds = `0${seconds}`;
-
-        const timeString = `${hour}:${minutes}:${seconds} ${ampm}`;
-        // time.toLocaleTimeString('en-US')
-        setClock(timeString);
-    }; */
+        time = change.format('hh:mm:ss A');
+        setClock(time);
+    };
     
     // Use Effect para traer la información de weatherapi
     useEffect( () => {
@@ -99,66 +75,14 @@ function Dashboard(){
         })
         .catch( error =>
             console.log(error));
-    }, []);
+    }, [state]);
     
-        
     // Use Effect para el reloj en tiempo real capaz de manejar sonas horarias
     useEffect( () => {
         setInterval(() => {
-            console.log(timezone);
-            const m = moment();
-            let change = m;
-            let time;
-
-            if(timezone === 'Pacífico - Nevada'){
-                change.subtract(2, 'hours');
-                state = 'las vegas'
-            } else if(timezone === 'Montaña - Colorado'){
-                change.subtract(1, 'hours');
-                state = 'denver'
-            } else if(timezone === 'Central - Oklahoma'){
-                state = 'oklahoma city'
-            } else if(timezone === 'Este - Virginia'){
-                change.add(1, 'hours');
-                state = 'carolina beach'
-            }else if(timezone === 'Buenos Aires'){
-                change.add(2, 'hours');
-                state = 'buenos aires'
-            }
-
-            time = change.format('hh:mm:ss A');
-            setClock('');
-            setClock(time);
-            
-            // const time = new Date();
-            /* let hour = time.getHours()
-            let minutes = time.getMinutes();
-            let seconds = time.getSeconds();
-            let ampm = 'AM'; */
-            
-            //PASAR handleOnClickTimeZone JUSTO AQUI
-            /* handleOnClickTimeZone(timezone); */
-
-            /* // Detectando cuando es de mañana o tarde
-            if(hour > 12) {
-                hour -= 12
-                ampm = 'PM'
-            }else if(hour === 0) {
-                hour = 12
-                ampm = 'AM';
-            } else if(hour === 12) ampm = 'PM'
-
-            // Colocando un cero para mostrar siempre 2 digitos
-            if(hour.toString().length === 1) hour = `0${hour}`;
-            if(minutes.toString().length === 1) minutes = `0${minutes}`;
-            if(seconds.toString().length === 1) seconds = `0${seconds}`;
-
-            const timeString = `${hour}:${minutes}:${seconds} ${ampm}`;
-            // time.toLocaleTimeString('en-US')
-            setClock(timeString); */
+            handleOnClickTimeZone();
         }, 1000)
-    }, [timezone]);
-
+    });
 
     return(
         <div>
@@ -225,10 +149,11 @@ function Dashboard(){
                                     return(
                                         city.timezone.map( time => (
                                             <li onClick={(e) => {
-                                                const empty = ''
+                                                selectedTimezone = e.target.innerText;
+                                                console.log(selectedTimezone);
+                                                /* const empty = ''
                                                 setTimezone(empty);
-                                                setTimezone(e.target.innerText);
-                                                /* handleOnClickTimeZone(timezone, time); */
+                                                setTimezone(e.target.innerText); */
                                             }}>{time}</li>
                                         ))
                                     );
