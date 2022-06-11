@@ -1,12 +1,14 @@
 import axios from "axios";
-/* import {format, formatInTimeZone, zonedTimeRoUtc, zonedTimeToUtc} from 'date-fns-tz' */
-import enUS from 'date-fns/locale/en-US';
+import moment from "moment";
 import React, {useState, useEffect, Fragment} from "react";
 import Header from './Header';
 
 function Dashboard(){
     const [weather, setWeather] = useState([]);
     const [clock, setClock] = useState('');
+    let [timezone, setTimezone] = useState('');
+    const key = 'abc55348044d4260bad201612220906';
+    let state = 'las vegas';    
     const cities = [
         {
             country: 'Mexico',
@@ -27,44 +29,39 @@ function Dashboard(){
             pais: 'Estados Unidos',
         },
     ];
-    const key = 'abc55348044d4260bad201612220906';
-    let state = 'las vegas';
-    /* let time = new Date().toLocaleString('en-US', {hour: 'numeric', minute: 'numeric', second: 'numeric'});
-    let dateString = new Date().toLocaleString('en-GB', { day:'2-digit', month: '2-digit', year:'numeric' }); */
-    
-    const handleOnClickTimeZone = (e) => {
-        /* console.log(e); */
-        const timezones = document.querySelector('#timezone ul').querySelectorAll('li');
+
+    //IMPRIMIR UNA ALERTA QUE ESPECIFIQUE LA HORA
+    /* const handleOnClickTimeZone = (timezone, prueba) => {
+        console.log(prueba);
+        // const timezones = document.querySelector('#timezone ul li');
         const time = new Date();
         let hour = time.getHours()
         let minutes = time.getMinutes();
         let seconds = time.getSeconds();
         let ampm = 'AM';
 
-        /* console.log(timezones); */
-        if(e.target.id === 'Pacifico - Nevada'){
+        console.log(timezone);
+        if(timezone === 'Pacifico - Nevada'){
             state = 'las vegas';
             hour -= 2;
-            /* setClock(TIME.toCorrectTimeZone()) */ // COLOCAR CONSTANTE 'time' EN SCOPE GLOBAL
-        } else if(e.target.id === 'Montaña - Colorado'){
+            console.log(hour);
+        } else if(timezone === 'Montaña - Colorado'){
             state = 'denver';
             hour -= 1;
-            /* setClock(TIME.toCorrectTimeZone()) */ // COLOCAR CONSTANTE 'time' EN SCOPE GLOBAL
-        } else if(e.target.id === 'Central - Oklahoma'){
+        } else if(timezone === 'Central - Oklahoma'){
             state = 'oklahoma city';
-            /* setClock(TIME.toCorrectTimeZone()) */ // COLOCAR CONSTANTE 'time' EN SCOPE GLOBAL
-        } else if(e.target.id === 'Este - Virginia'){
+        } else if(timezone === 'Este - Virginia'){
             state = 'virginia beach';
             hour += 1;
-            /* setClock(TIME.toCorrectTimeZone()) */ // COLOCAR CONSTANTE 'time' EN SCOPE GLOBAL
-        } else if(e.target.id === 'Buenos Aires'){
+        } else if(timezone === 'Buenos Aires'){
             state = 'buenos aires';
             hour += 2;
-            /* setClock(TIME.toCorrectTimeZone()) */ // COLOCAR CONSTANTE 'time' EN SCOPE GLOBAL
         } else{
+            console.log('TIMEZONE: ' + timezone + 'HOUR: ' + hour);
             setClock(time.toLocaleTimeString('en-US'));
             return;
         }
+        console.log(hour);
 
         // Detectando cuando es de mañana o tarde
         
@@ -74,7 +71,14 @@ function Dashboard(){
         }else if(hour === 0) {
             hour = 12
             ampm = 'AM';
+        }else if(hour === -2){
+            hour = 10;
+            ampm = 'PM';
+        } else if(hour === -1){
+            hour = 11;
+            ampm = 'PM';
         } else if(hour === 12) ampm = 'PM'
+        
 
         // Colocando un cero para mostrar siempre 2 digitos
         if(hour.toString().length === 1) hour = `0${hour}`;
@@ -82,9 +86,9 @@ function Dashboard(){
         if(seconds.toString().length === 1) seconds = `0${seconds}`;
 
         const timeString = `${hour}:${minutes}:${seconds} ${ampm}`;
-        /* time.toLocaleTimeString('en-US') */
+        // time.toLocaleTimeString('en-US')
         setClock(timeString);
-    };
+    }; */
     
     // Use Effect para traer la información de weatherapi
     useEffect( () => {
@@ -101,6 +105,31 @@ function Dashboard(){
     // Use Effect para el reloj en tiempo real capaz de manejar sonas horarias
     useEffect( () => {
         setInterval(() => {
+            console.log(timezone);
+            const m = moment();
+            let change = m;
+            let time;
+
+            if(timezone === 'Pacífico - Nevada'){
+                change.subtract(2, 'hours');
+                state = 'las vegas'
+            } else if(timezone === 'Montaña - Colorado'){
+                change.subtract(1, 'hours');
+                state = 'denver'
+            } else if(timezone === 'Central - Oklahoma'){
+                state = 'oklahoma city'
+            } else if(timezone === 'Este - Virginia'){
+                change.add(1, 'hours');
+                state = 'carolina beach'
+            }else if(timezone === 'Buenos Aires'){
+                change.add(2, 'hours');
+                state = 'buenos aires'
+            }
+
+            time = change.format('hh:mm:ss A');
+            setClock('');
+            setClock(time);
+            
             // const time = new Date();
             /* let hour = time.getHours()
             let minutes = time.getMinutes();
@@ -108,7 +137,7 @@ function Dashboard(){
             let ampm = 'AM'; */
             
             //PASAR handleOnClickTimeZone JUSTO AQUI
-            handleOnClickTimeZone();
+            /* handleOnClickTimeZone(timezone); */
 
             /* // Detectando cuando es de mañana o tarde
             if(hour > 12) {
@@ -128,7 +157,7 @@ function Dashboard(){
             // time.toLocaleTimeString('en-US')
             setClock(timeString); */
         }, 1000)
-    }, []);
+    }, [timezone]);
 
 
     return(
@@ -195,7 +224,12 @@ function Dashboard(){
                                 if(info.location.country === city.country){
                                     return(
                                         city.timezone.map( time => (
-                                            <li id={time} onClick={(e) => handleOnClickTimeZone(e)}>{time}</li>
+                                            <li onClick={(e) => {
+                                                const empty = ''
+                                                setTimezone(empty);
+                                                setTimezone(e.target.innerText);
+                                                /* handleOnClickTimeZone(timezone, time); */
+                                            }}>{time}</li>
                                         ))
                                     );
                                 } else return(false)
