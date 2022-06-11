@@ -146,13 +146,13 @@ aside .card-container {
 
 .card-container li { margin: 15px 0; }
 
-#timezone ul li {
+#timezone ul li, #available-country p{
   width: fit-content;
   transition: all ease-in-out .3s;
   cursor: pointer;
 }
 
-#timezone ul li:hover {
+#timezone ul li:hover, #available-country p:hover {
   color: var(--dark-blue);
   transition: all ease-in-out .3s;
 }
