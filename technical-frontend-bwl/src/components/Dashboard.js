@@ -111,67 +111,64 @@ function Dashboard(){
                         </div>
                     
                 
-                <div className="card">
-                    <h3>Tareas pendientes</h3>
-                    <div id="uncompleted-task" className="card-container" >
-                        <ul>
-                            <li>Ir al banco</li>
-                            <li>Revisar balance general</li>
-                            <li>Ajustar métricas de diseño</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div className="card">
-                    <h3>Hora</h3>
-                    <div id="hour" className="card-container" >
-                        <p>{clock}</p>
-                    </div>
-                </div>
-
-                <div className="card">
-                    <h3>Tareas completadas</h3>
-                    <div id="completed-task" className="card-container" >
-                        <ul>
-                            <li>Terminar la prueba</li>
-                            <li>Debuggear código</li>
-                            <li>Realizar pruebas unitarias</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div className="card">
-                    <h3>Zonas horarias disponibles</h3>
-                    <div id="timezone" className="card-container" >
-                        <ul>
-                            { cities.map( city => {
-                                if(info.location.country === city.country){
-                                    return(
-                                        city.timezone.map( time => (
-                                            <li onClick={(e) => {
-                                                selectedTimezone = e.target.innerText;
-                                                console.log(selectedTimezone);
-                                                /* const empty = ''
-                                                setTimezone(empty);
-                                                setTimezone(e.target.innerText); */
-                                            }}>{time}</li>
-                                        ))
-                                    );
-                                } else return(false)
-                                }) }
-                        </ul>
-                    </div>
-                </div>
-                
-                <aside className="card">
-                    <h3>Paises disponibles</h3>
-                    { cities.map( city => (
-                        <div id="available-country" className="grid card-container" >
-                            <img src={city.flag} alt="flag" />
-                            <p>{city.pais}</p>
+                    <div className="card">
+                        <h3>Tareas pendientes</h3>
+                        <div id="uncompleted-task" className="card-container" >
+                            <ul>
+                                <li>Ir al banco</li>
+                                <li>Revisar balance general</li>
+                                <li>Ajustar métricas de diseño</li>
+                            </ul>
                         </div>
-                    )) }
-                </aside>
+                    </div>
+                    
+                    <div className="card">
+                        <h3>Hora</h3>
+                        <div id="hour" className="card-container" >
+                            <p>{clock}</p>
+                        </div>
+                    </div>
+
+                    <div className="card">
+                        <h3>Tareas completadas</h3>
+                        <div id="completed-task" className="card-container" >
+                            <ul>
+                                <li>Terminar la prueba</li>
+                                <li>Debuggear código</li>
+                                <li>Realizar pruebas unitarias</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div className="card">
+                        <h3>Zonas horarias disponibles</h3>
+                        <div id="timezone" className="card-container" >
+                            <ul>
+                                { cities.map( city => {
+                                    if(info.location.country === city.country){
+                                        return(
+                                            city.timezone.map( time => (
+                                                <li onClick={(e) => {
+                                                    selectedTimezone = e.target.innerText;
+                                                    console.log(selectedTimezone);
+                                                }}>{time}</li>
+                                            ))
+                                        );
+                                    } else return(false)
+                                    }) }
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <aside className="card">
+                        <h3>Paises disponibles</h3>
+                        { cities.map( city => (
+                            <div id="available-country" className="grid card-container" >
+                                <img src={city.flag} alt="flag" />
+                                <p>{city.pais}</p>
+                            </div>
+                        )) }
+                    </aside>
                 </Fragment>
                 )) } 
             </div>
