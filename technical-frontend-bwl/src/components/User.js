@@ -1,11 +1,13 @@
 import React, { Fragment } from 'react';
+import { useSelector } from 'react-redux';
 import Header from './Header'
 
 function User(){
-    
+    const users = useSelector( state => state.users );
     const time = new Date().toLocaleString('en-US', {hour: 'numeric', minute: 'numeric', second: 'numeric'});
     const dateString = new Date().toLocaleString('en-GB', { day:'2-digit', month: '2-digit', year:'numeric' });
     
+    console.log(users);
     console.log('time: ', time);
     console.log('full date: ', dateString);
     
@@ -25,12 +27,16 @@ function User(){
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td id='name'>Angel Damián Martínez Delfín</td>
-                        <td id='email'>dmartinez@bwl.com.mx</td>
-                        <td id='sign-up'>21/04/2021</td>
-                        <td id='sign-in'>22/04/2021 11:25</td>
-                    </tr>
+                    {users.map( user => (
+                        <tr key={user._id} >
+                            <Fragment>
+                                <td id='name'>{user.nombre}</td>
+                                <td id='email'>{user.correo}</td>
+                                <td id='sign-up'>{user.registro}</td>
+                                <td id='sign-in'>{user.logout}</td>
+                            </Fragment>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>

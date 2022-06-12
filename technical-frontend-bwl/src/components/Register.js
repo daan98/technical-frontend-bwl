@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createUsers } from "../actions/UserActions";
 // import {NavLink} from 'react-router-dom'
 function Register(){
+    const users = useSelector( state => state.users )
+    const createUserDispatch = useDispatch();
+
+    useState(() => {
+        createUserDispatch(createUsers('Daniel', 'Dani', '123', 'daniel@dani.com', '12/06/2022', '12/06/2022 0:55'))
+    }, [createUserDispatch])
 
     const handleOnSubmitForm = (e) => {
         e.preventDefault();
@@ -43,6 +51,8 @@ function Register(){
 
     return(
         <div className="form-container">
+            {console.log(createUserDispatch)}
+            {console.log(users)}
             <h1>Crear cuenta</h1>
             
             <form className="grid form" onSubmit={handleOnSubmitForm}>
