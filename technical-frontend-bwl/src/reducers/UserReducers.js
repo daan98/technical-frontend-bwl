@@ -1,13 +1,27 @@
 export default (users = [], action) => {
-    switch (action.type) {
+    const { type, payload } = action;
+    switch (type) {
         case 'GET_ALL_USERS':
-            return action.payload;
+            return payload;
+
         case 'CREATE_USER':
-            return action.payload;     
+            return [...users, payload];
+
         case 'GET_SINGLE_USER':
-            return action.payload;
+            return payload;
+
         case 'UPDATE_USER':
-            return action.payload;
+            return users.map( user => {
+                if(user.id === payload.id) {
+                    return {
+                        ...user,
+                        payload
+                    };
+                } else{
+                    return user
+                }
+            });
+
         default:
             return users;
     }

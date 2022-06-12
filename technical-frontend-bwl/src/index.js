@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -8,12 +8,9 @@ import { applyMiddleware, compose, createStore } from 'redux';
 import reducers from './reducers';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit';
-import users from '../src/reducers';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-// const store = createStore(reducers, compose(applyMiddleware(thunk)));
-const store = configureStore({ reducer: users })
+const store = createStore(reducers, compose(applyMiddleware(thunk)));
 
 root.render(
   <React.StrictMode>

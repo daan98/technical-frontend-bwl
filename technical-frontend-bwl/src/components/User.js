@@ -4,7 +4,7 @@ import Header from './Header'
 
 function User(){
     const users = useSelector( state => state.users );
-    const time = new Date().toLocaleString('en-US', {hour: 'numeric', minute: 'numeric', second: 'numeric'});
+    const time = new Date().toLocaleString('en-GB', {hour: 'numeric', minute: 'numeric'});
     const dateString = new Date().toLocaleString('en-GB', { day:'2-digit', month: '2-digit', year:'numeric' });
     
     console.log(users);

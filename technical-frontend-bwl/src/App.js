@@ -11,12 +11,12 @@ import User from './components/User';
 function App() {
   const userDispatch = useDispatch();
   const updateUserDispatch = useDispatch();
-  const createUserDispatch = useDispatch();
+  const createUserDispatch = useDispatch();  
 
   useEffect( () => {
-    userDispatch(getUsers);
-    updateUserDispatch(updateUser);
-    createUserDispatch(createUsers);
+    userDispatch(getUsers());
+    updateUserDispatch(updateUser());
+    createUserDispatch(createUsers());
   }, [userDispatch, updateUserDispatch, createUserDispatch]);
 
   return (

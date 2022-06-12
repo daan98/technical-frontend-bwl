@@ -6,7 +6,7 @@ import Header from './Header';
 function Dashboard(){
     const [weather, setWeather] = useState([]);
     const [clock, setClock] = useState('');
-    const [city, setCity] = useState('las vegas');
+    const [city, setCity] = useState('ciudad de mexico');
     const key = 'abc55348044d4260bad201612220906'; 
     let selectedTimezone = ''; 
     const timezone = ['Las Vegas', 'Denver', 'Atlanta', 'Buenos Aires'];
