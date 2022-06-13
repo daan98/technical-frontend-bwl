@@ -7,7 +7,7 @@ function Dashboard(){
     const [weather, setWeather] = useState([]);
     const [clock, setClock] = useState('');
     const [city, setCity] = useState('ciudad de mexico');
-    const key = 'abc55348044d4260bad201612220906'; 
+    const key = ''; // Por razones de seguridad se deja este valor vacio
     let selectedTimezone = ''; 
     const timezone = ['Las Vegas', 'Denver', 'Atlanta', 'Buenos Aires']; // Zonas horarias disponible en la app
     const cities = [
