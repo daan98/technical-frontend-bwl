@@ -1,4 +1,4 @@
-import React from "react";
+/* import React from "react";
 import { Navigate } from "react-router-dom";
 
 function ProtectedRoute({ children }){
@@ -10,3 +10,6 @@ function ProtectedRoute({ children }){
 }
 
 export default ProtectedRoute;
+SE PUEDE PROHIBIR AL USUARIO VOSOTAR UNA URL ESPECIFICA SI NO CUMPLE LA CONDICIÓN (USA LocalStorage)
+*/
+

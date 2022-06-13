@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { createUsers } from "../actions/UserActions";
 // import {NavLink} from 'react-router-dom'
 function Register(){
@@ -13,14 +13,12 @@ function Register(){
         registro: '',
         logout: ''
     }
-    const [user, setUser] = useState(userState)
-    const [name, setName] = useState(userState.nombre);
-    const [shortName, setShortName] = useState(userState.nombrecito);
-    const [password, setPassword] = useState(userState.contraseña);
-    const [password2, setPassword2] = useState(userState.contraseña);
-    const [email, setEmail] = useState(userState.correo);
-    const [register, setRegister] = useState(userState.registro);
-    const [logout, setLogout] = useState(userState.logout);
+    const [, setUser] = useState(userState)
+    const [, setName] = useState(userState.nombre);
+    const [, setPassword] = useState(userState.contraseña);
+    const [, setPassword2] = useState(userState.contraseña);
+    const [, setEmail] = useState(userState.correo);
+
     
     const handleOnSubmitForm = (e) => {
         e.preventDefault();
@@ -109,7 +107,6 @@ function Register(){
                     setName(e.target.innerText);
                     } } />
 
-                {/* <NavLink to="/dashboard" className="btn" type="submit" >Registrarme</NavLink> */}
                 <button className="btn" type="submit">Prueba</button>
             </form>
         </div>

@@ -9,7 +9,7 @@ function Dashboard(){
     const [city, setCity] = useState('ciudad de mexico');
     const key = 'abc55348044d4260bad201612220906'; 
     let selectedTimezone = ''; 
-    const timezone = ['Las Vegas', 'Denver', 'Atlanta', 'Buenos Aires'];
+    const timezone = ['Las Vegas', 'Denver', 'Atlanta', 'Buenos Aires']; // Zonas horarias disponible en la app
     const cities = [
         {
             country: 'Mexico',
@@ -33,7 +33,6 @@ function Dashboard(){
             pais: 'Estados Unidos',
         },
     ];
-    let selectCity = 'las vegas';
     const paragraph = document.createElement('p');
     const hourContainer = document.getElementById('hour');
 
@@ -45,25 +44,20 @@ function Dashboard(){
         let change = m;
         let time;
         
-        const result = timezone.filter(zone => zone === selectedTimezone);
+        const result = timezone.filter(zone => zone === selectedTimezone); // Detectando la zona horaria
         if(result[0] === 'Las Vegas'){
             paragraph.innerText = `${result[0]} ${change.subtract(2, 'hours').format('hh:mm:ss A')}`;
             hourContainer.appendChild(paragraph);
-            selectCity = 'las vegas'
         } else if(result[0] === 'Denver'){
             paragraph.innerText = `${result[0]} ${change.subtract(1, 'hours').format('hh:mm:ss A')}`;
             hourContainer.appendChild(paragraph);
-            selectCity = 'denver'
         } else if(result[0] === 'Oklahoma City'){
-            selectCity = 'oklahoma city'
         } else if(result[0] === 'Atlanta'){
             paragraph.innerText = `${result[0]} ${change.add(1, 'hours').format('hh:mm:ss A')}`;
             hourContainer.appendChild(paragraph);
-            selectCity = 'Atlanta'
         }else if(result[0] === 'Buenos Aires'){
             paragraph.innerText = `${result[0]} ${change.add(2, 'hours').format('hh:mm:ss A')}`;
             hourContainer.appendChild(paragraph);
-            selectCity = 'buenos aires'
         }
 
         time = change.format('hh:mm:ss A');
@@ -153,8 +147,8 @@ function Dashboard(){
                                                 city.timezone.map( time => (
                                                     <li onClick={(e) => {
                                                         setCity(e.target.innerText);
-                                                        document.querySelectorAll('p#new-hour').forEach( item => item.style.display = 'none' );
-                                                        selectedTimezone = e.target.innerText;
+                                                        document.querySelectorAll('p#new-hour').forEach( item => item.style.display = 'none' ); // Eliminando los horarios adicoinales mostrandose
+                                                        selectedTimezone = e.target.innerText; // cambiando la zona a mostrar
                                                     }}>{time}</li>
                                                 ))
                                             );

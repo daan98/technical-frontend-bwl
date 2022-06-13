@@ -13,11 +13,12 @@ function Login(){
         registro: '',
         logout: ''
     };
-    const [user, setUser] = useState(userState)
+    const [, setUser] = useState(userState)
     const users = useSelector( state => state.users );
     const updateUserDispatch = useDispatch();
 
     console.log(users);
+
     const onSubmitForm = (e) => {
         e.preventDefault();
         console.log(e);
@@ -46,11 +47,13 @@ function Login(){
 
         } else{
             // Obteniendo hora del login y usuario
-            const result = users.filter( user => user.correo === email.value && user.contraseña === password.value );
+            const result = users.filter( user => user.correo === email.value );
             const register = new Date().toLocaleString('en-GB', { day:'2-digit', month: '2-digit', year:'numeric' });
             const time = new Date().toLocaleString('en-GB', {hour: 'numeric', minute: 'numeric'});  // cambiar valor de locales a 'en-US' si se desea tiempo de 12 horas y usar time.slice(0, -3) para quitar el A.M/P.M
             const lastLogin = register + ' ' + time;
             
+            console.log(result);
+            console.log(email.value);
             result[0].logout = lastLogin;
 
             // Actualizando la información en la base de datos

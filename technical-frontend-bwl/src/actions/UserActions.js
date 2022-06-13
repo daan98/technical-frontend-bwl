@@ -9,7 +9,7 @@ export const getUsers = () => async (dispatch) => {
     }
 };
 
-export const createUsers = (nombre, nombrecito, contraseña, correo, registro, logout) => async (dispatch) => { // pasamos la información de los campos que estan en el cuerpo
+export const createUsers = (nombre, nombrecito, contraseña, correo, registro, logout, on) => async (dispatch) => { // pasamos la información de los campos que estan en el cuerpo
     try {
         const { data } = await api.CreateUser({nombre, nombrecito, contraseña, correo, registro, logout});
         dispatch({ type: 'CREATE_USER', payload: data });
